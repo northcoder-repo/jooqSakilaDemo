@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    
+    <property name="SHORT-LINE" value="%d{HH:mm:ss.SSS} %-5level [%-15.15logger] - %msg%n"/>
+    
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${SHORT-LINE}</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- change the following level from "info" to "debug" to see       -->
+    <!-- jOOQ SQL statements, or to "trace" to see even more details... -->
+    <logger name="org.jooq.tools.LoggerListener" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+    
+</configuration>

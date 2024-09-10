@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--                                                                 -->
+<!-- This will generate the output file 'information_schema.xml'     -->
+<!-- in 'target/generated-sources/jooq/org/jooq/generated/'          -->
+<!--                                                                 -->
+<!-- The path 'target/generated-sources/jooq/' is always the         -->
+<!-- default base location for jOOQ generated output.                -->
+<!--                                                                 -->
+<!-- The remainder of the path ('org/jooq/generated/') is also       -->
+<!-- the default location in this case (generating an XML schema).   -->
+<!--                                                                 -->
+<configuration>
+    <!-- JDBC connection parameters -->
+    <jdbc>
+        <driver>com.mysql.cj.jdbc.Driver</driver>
+        <url>jdbc:mysql://localhost:3306/sakila</url>
+        <user>sakilauser</user>
+        <password>sakilapass</password>
+    </jdbc>
+    <!-- Generator parameters -->
+    <generator>
+        <name>org.jooq.codegen.XMLGenerator</name>
+        <database>
+            <name>org.jooq.meta.mysql.MySQLDatabase</name>
+            <includes>.*</includes>
+            <excludes></excludes>
+            <inputSchema>sakila</inputSchema>
+            <!-- the following can be removed in jOOQ v 3.20.0 onwards -->
+            <!-- see https://github.com/jOOQ/jOOQ/issues/17135         -->
+            <unsignedTypes>false</unsignedTypes>
+        </database>
+        <target>
+            <!-- the following will result in an XML file here:  -->
+            <!-- generated-sources/schema/information_schema.xml -->
+            <directory>generated-sources/</directory>
+            <packageName>schema</packageName>
+        </target>
+    </generator>
+</configuration>
