@@ -901,13 +901,13 @@ class JooqExamples {
         //
         // delete:
         //
-        Query deleteQueryA = dsl.delete(COUNTRY)
-                .where(COUNTRY.COUNTRY_ID.eq(110));
-        DaoResult resultThree = dao.delete(deleteQueryA);
+        //Query deleteQueryA = dsl.delete(COUNTRY)
+        //        .where(COUNTRY.COUNTRY_ID.eq(110));
+        DaoResult resultThree = dao.delete(COUNTRY, COUNTRY.COUNTRY_ID.eq(110));
         // or:
-        DeleteQuery<FilmRecord> deleteQueryB = dsl.deleteQuery(FILM);
-        deleteQueryB.addConditions(FILM.FILM_ID.eq(12));
-        DaoResult resultFour = dao.delete(deleteQueryB);
+        //DeleteQuery<FilmRecord> deleteQueryB = dsl.deleteQuery(FILM);
+        //deleteQueryB.addConditions(FILM.FILM_ID.eq(12));
+        DaoResult resultFour = dao.delete(FILM, FILM.FILM_ID.eq(12));
         System.out.println(resultFour.ex().getCause().getMessage());
     }
 
