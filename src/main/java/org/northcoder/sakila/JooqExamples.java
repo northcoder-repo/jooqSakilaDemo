@@ -875,6 +875,27 @@ class JooqExamples {
         List<FilmRecord> filmsA = dao.fetchAll(FILM, FilmRecord.class);
         System.out.println(filmsA.getFirst().getTitle());
         //
+        // with sorting (this example adapts one of my earlier POJO queries):
+        //
+        Select filmRecQuery = DSL.select(
+                FILM.TITLE,
+                DSL.multiset(
+                        DSL.select(
+                                FILM_ACTOR.actor().FIRST_NAME,
+                                FILM_ACTOR.actor().LAST_NAME)
+                                .from(FILM_ACTOR)
+                                .where(FILM_ACTOR.FILM_ID.eq(FILM.FILM_ID))
+                ).as("actors").convertFrom(r -> r.map(Records.mapping(ActorRec::new))),
+                DSL.multiset(
+                        DSL.select(FILM_CATEGORY.category().NAME)
+                                .from(FILM_CATEGORY)
+                                .where(FILM_CATEGORY.FILM_ID.eq(FILM.FILM_ID))
+                ).as("categories").convertFrom(r -> r.map(Records.mapping(CategoryRec::new)))
+        )
+                .from(FILM)
+                .orderBy(FILM.TITLE.asc());
+        List<FilmRec> filmRecs = dao.fetchPojoList(filmRecQuery, FilmRec.class);
+        //
         // get one:
         //
         ResultQuery<Record> query = dsl

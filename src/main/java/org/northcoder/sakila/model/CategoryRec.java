@@ -1,6 +1,6 @@
 package org.northcoder.sakila.model;
 
 public record CategoryRec(
-        String category) {
+        String category) implements SakilaPojo {
 
 }

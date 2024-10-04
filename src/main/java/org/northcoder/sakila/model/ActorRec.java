@@ -2,6 +2,6 @@ package org.northcoder.sakila.model;
 
 public record ActorRec(
         String firstName,
-        String lastName) {
+        String lastName) implements SakilaPojo {
 
 }
