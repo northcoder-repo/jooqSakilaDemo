@@ -4,9 +4,12 @@ package org.northcoder.sakila;
 // import org.jooq.Record;
 // WARNING - this is to avoid a conflict with Java 14's Record
 import java.math.BigDecimal;
+import java.text.Collator;
 import java.time.LocalDateTime;
 import java.time.Year;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import org.jooq.Condition;
@@ -895,6 +898,16 @@ class JooqExamples {
                 .from(FILM)
                 .orderBy(FILM.TITLE.asc());
         List<FilmRec> filmRecs = dao.fetchPojoList(filmRecQuery, FilmRec.class);
+
+        //
+        // Sorting with a Java comparator and a locale:
+        //
+        final Collator french = Collator.getInstance(Locale.forLanguageTag("fr-FR"));
+        final Comparator<ActorRecord> actorComparator = Comparator
+                .comparing(ActorRecord::getLastName, french)
+                .thenComparing(ActorRecord::getFirstName, french);
+        List<ActorRecord> recs = dao.fetchAllSorted(ACTOR, ActorRecord.class, actorComparator);
+
         //
         // get one:
         //
