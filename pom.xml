@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
         <jooq.version>3.19.10</jooq.version>
-        <logback.version>1.5.25</logback.version>
+        <logback.version>1.5.33</logback.version>
     </properties>
     <dependencies>
         <dependency>
